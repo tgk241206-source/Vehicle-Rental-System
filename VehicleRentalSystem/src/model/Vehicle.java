@@ -3,17 +3,17 @@ package model;
 import java.math.BigDecimal;
 
 public class Vehicle {
+
     private Long id;
-    private String code;
-    private String name;
-    private String type;        
-    private String brand;
-    private String engineType;  
-    private int seatCount;
-    private BigDecimal pricePerDay;
-    private BigDecimal depositAmount;
-    private String status;      
-    private String imageUrl;
+    private String code;           
+    private String name;           
+    private String brand;      
+    private String model;          
+    private String licensePlate;   
+    private int seatCount;         
+    private BigDecimal pricePerDay; 
+    private BigDecimal deposit; 
+    private String status;         
     private String description;
 
     public static final String STATUS_AVAILABLE = "AVAILABLE";
@@ -26,26 +26,24 @@ public class Vehicle {
     public Vehicle(Long id,
                    String code,
                    String name,
-                   String type,
                    String brand,
-                   String engineType,
+                   String model,
+                   String licensePlate,
                    int seatCount,
                    BigDecimal pricePerDay,
-                   BigDecimal depositAmount,
+                   BigDecimal deposit,
                    String status,
-                   String imageUrl,
                    String description) {
         this.id = id;
         this.code = code;
         this.name = name;
-        this.type = type;
         this.brand = brand;
-        this.engineType = engineType;
+        this.model = model;
+        this.licensePlate = licensePlate;
         this.seatCount = seatCount;
         this.pricePerDay = pricePerDay;
-        this.depositAmount = depositAmount;
+        this.deposit = deposit;
         this.status = status;
-        this.imageUrl = imageUrl;
         this.description = description;
         validate();
     }
@@ -57,62 +55,110 @@ public class Vehicle {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Vehicle name is required");
         }
+        if (licensePlate == null || licensePlate.isBlank()) {
+            throw new IllegalArgumentException("License plate is required");
+        }
         if (seatCount <= 0) {
             throw new IllegalArgumentException("Seat count must be > 0");
         }
-        if (pricePerDay == null || pricePerDay.signum() < 0) {
-            throw new IllegalArgumentException("Price per day must be >= 0");
+        if (pricePerDay == null || pricePerDay.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("Price per day must be > 0");
         }
-        if (depositAmount == null || depositAmount.signum() < 0) {
+        if (deposit == null || deposit.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Deposit must be >= 0");
+        }
+        if (status == null || status.isBlank()) {
+            status = STATUS_AVAILABLE;
         }
     }
 
+    // Getters & Setters
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getCode() { return code; }
-    public void setCode(String code) { this.code = code; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    public String getCode() {
+        return code;
+    }
 
-    public String getType() { return type; }
-    public void setType(String type) { this.type = type; }
+    public void setCode(String code) {
+        this.code = code;
+    }
 
-    public String getBrand() { return brand; }
-    public void setBrand(String brand) { this.brand = brand; }
+    public String getName() {
+        return name;
+    }
 
-    public String getEngineType() { return engineType; }
-    public void setEngineType(String engineType) { this.engineType = engineType; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public int getSeatCount() { return seatCount; }
-    public void setSeatCount(int seatCount) { this.seatCount = seatCount; }
+    public String getBrand() {
+        return brand;
+    }
 
-    public BigDecimal getPricePerDay() { return pricePerDay; }
-    public void setPricePerDay(BigDecimal pricePerDay) { this.pricePerDay = pricePerDay; }
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
 
-    public BigDecimal getDepositAmount() { return depositAmount; }
-    public void setDepositAmount(BigDecimal depositAmount) { this.depositAmount = depositAmount; }
+    public String getModel() {
+        return model;
+    }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public void setModel(String model) {
+        this.model = model;
+    }
 
-    public String getImageUrl() { return imageUrl; }
-    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+    public String getLicensePlate() {
+        return licensePlate;
+    }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
 
-    @Override
-    public String toString() {
-        return "Vehicle{id=" + id +
-                ", code='" + code + '\'' +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", pricePerDay=" + pricePerDay +
-                ", status='" + status + '\'' +
-                '}';
+    public int getSeatCount() {
+        return seatCount;
+    }
+
+    public void setSeatCount(int seatCount) {
+        this.seatCount = seatCount;
+    }
+
+    public BigDecimal getPricePerDay() {
+        return pricePerDay;
+    }
+
+    public void setPricePerDay(BigDecimal pricePerDay) {
+        this.pricePerDay = pricePerDay;
+    }
+
+    public BigDecimal getDeposit() {
+        return deposit;
+    }
+
+    public void setDeposit(BigDecimal deposit) {
+        this.deposit = deposit;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
