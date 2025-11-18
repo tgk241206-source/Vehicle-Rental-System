@@ -1,77 +1,40 @@
 package model;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Rental {
+
     private Long id;
-    private String rentalCode;
     private Customer customer;
     private Vehicle vehicle;
-    private Staff createdBy;          
+    private Staff staff;            
 
-    private LocalDateTime pickupDateTime;
-    private LocalDateTime returnDateTime;
+    private LocalDateTime bookingTime;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private String pickupLocation;
     private String dropoffLocation;
 
-    private int rentalDays;
-    private BigDecimal basePricePerDay;
-    private BigDecimal addOnFee;
-    private BigDecimal insuranceFee;
-    private BigDecimal taxFee;
-    private BigDecimal discountAmount;
-    private BigDecimal depositAmount;
-    private BigDecimal totalAmount;
+    private long totalDays;
+    private BigDecimal baseAmount;        
+    private BigDecimal surchargeAmount;  
+    private BigDecimal discountAmount;    
+    private BigDecimal totalAmount;      
+    private BigDecimal depositAmount;   
 
-    private String status;           
+    private String status;              
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private String notes;
 
-    public static final String STATUS_PENDING   = "PENDING";
-    public static final String STATUS_CONFIRMED = "CONFIRMED";
-    public static final String STATUS_RENTING   = "RENTING";
+    public static final String STATUS_BOOKED = "BOOKED";
+    public static final String STATUS_RENTING = "RENTING";
     public static final String STATUS_COMPLETED = "COMPLETED";
     public static final String STATUS_CANCELLED = "CANCELLED";
 
     public Rental() {
-    }
-
-    public Rental(Long id,
-                  String rentalCode,
-                  Customer customer,
-                  Vehicle vehicle,
-                  Staff createdBy,
-                  LocalDateTime pickupDateTime,
-                  LocalDateTime returnDateTime,
-                  String pickupLocation,
-                  String dropoffLocation,
-                  int rentalDays,
-                  BigDecimal basePricePerDay,
-                  BigDecimal addOnFee,
-                  BigDecimal insuranceFee,
-                  BigDecimal taxFee,
-                  BigDecimal discountAmount,
-                  BigDecimal depositAmount,
-                  BigDecimal totalAmount,
-                  String status) {
-        this.id = id;
-        this.rentalCode = rentalCode;
-        this.customer = customer;
-        this.vehicle = vehicle;
-        this.createdBy = createdBy;
-        this.pickupDateTime = pickupDateTime;
-        this.returnDateTime = returnDateTime;
-        this.pickupLocation = pickupLocation;
-        this.dropoffLocation = dropoffLocation;
-        this.rentalDays = rentalDays;
-        this.basePricePerDay = basePricePerDay;
-        this.addOnFee = addOnFee;
-        this.insuranceFee = insuranceFee;
-        this.taxFee = taxFee;
-        this.discountAmount = discountAmount;
-        this.depositAmount = depositAmount;
-        this.totalAmount = totalAmount;
-        this.status = status;
-        validate();
     }
 
     public void validate() {
@@ -81,67 +44,168 @@ public class Rental {
         if (vehicle == null) {
             throw new IllegalArgumentException("Vehicle is required");
         }
-        if (pickupDateTime == null || returnDateTime == null
-                || !returnDateTime.isAfter(pickupDateTime)) {
-            throw new IllegalArgumentException("Return time must be after pickup time");
+        if (startDate == null || endDate == null || endDate.isBefore(startDate)) {
+            throw new IllegalArgumentException("Invalid rental dates");
         }
-        if (rentalDays <= 0) {
-            throw new IllegalArgumentException("Rental days must be > 0");
+        if (totalAmount == null || totalAmount.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Total amount must be >= 0");
+        }
+        if (depositAmount == null || depositAmount.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Deposit must be >= 0");
         }
     }
 
+    // Getters & Setters
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getRentalCode() { return rentalCode; }
-    public void setRentalCode(String rentalCode) { this.rentalCode = rentalCode; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Customer getCustomer() { return customer; }
-    public void setCustomer(Customer customer) { this.customer = customer; }
+    public Customer getCustomer() {
+        return customer;
+    }
 
-    public Vehicle getVehicle() { return vehicle; }
-    public void setVehicle(Vehicle vehicle) { this.vehicle = vehicle; }
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 
-    public Staff getCreatedBy() { return createdBy; }
-    public void setCreatedBy(Staff createdBy) { this.createdBy = createdBy; }
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
 
-    public LocalDateTime getPickupDateTime() { return pickupDateTime; }
-    public void setPickupDateTime(LocalDateTime pickupDateTime) { this.pickupDateTime = pickupDateTime; }
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
 
-    public LocalDateTime getReturnDateTime() { return returnDateTime; }
-    public void setReturnDateTime(LocalDateTime returnDateTime) { this.returnDateTime = returnDateTime; }
+    public Staff getStaff() {
+        return staff;
+    }
 
-    public String getPickupLocation() { return pickupLocation; }
-    public void setPickupLocation(String pickupLocation) { this.pickupLocation = pickupLocation; }
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
 
-    public String getDropoffLocation() { return dropoffLocation; }
-    public void setDropoffLocation(String dropoffLocation) { this.dropoffLocation = dropoffLocation; }
+    public LocalDateTime getBookingTime() {
+        return bookingTime;
+    }
 
-    public int getRentalDays() { return rentalDays; }
-    public void setRentalDays(int rentalDays) { this.rentalDays = rentalDays; }
+    public void setBookingTime(LocalDateTime bookingTime) {
+        this.bookingTime = bookingTime;
+    }
 
-    public BigDecimal getBasePricePerDay() { return basePricePerDay; }
-    public void setBasePricePerDay(BigDecimal basePricePerDay) { this.basePricePerDay = basePricePerDay; }
+    public LocalDate getStartDate() {
+        return startDate;
+    }
 
-    public BigDecimal getAddOnFee() { return addOnFee; }
-    public void setAddOnFee(BigDecimal addOnFee) { this.addOnFee = addOnFee; }
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
 
-    public BigDecimal getInsuranceFee() { return insuranceFee; }
-    public void setInsuranceFee(BigDecimal insuranceFee) { this.insuranceFee = insuranceFee; }
+    public LocalDate getEndDate() {
+        return endDate;
+    }
 
-    public BigDecimal getTaxFee() { return taxFee; }
-    public void setTaxFee(BigDecimal taxFee) { this.taxFee = taxFee; }
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
+    }
 
-    public BigDecimal getDiscountAmount() { return discountAmount; }
-    public void setDiscountAmount(BigDecimal discountAmount) { this.discountAmount = discountAmount; }
+    public String getPickupLocation() {
+        return pickupLocation;
+    }
 
-    public BigDecimal getDepositAmount() { return depositAmount; }
-    public void setDepositAmount(BigDecimal depositAmount) { this.depositAmount = depositAmount; }
+    public void setPickupLocation(String pickupLocation) {
+        this.pickupLocation = pickupLocation;
+    }
 
-    public BigDecimal getTotalAmount() { return totalAmount; }
-    public void setTotalAmount(BigDecimal totalAmount) { this.totalAmount = totalAmount; }
+    public String getDropoffLocation() {
+        return dropoffLocation;
+    }
 
-    public String getStatus() { return status; }
-    public void setStatus(String status) { this.status = status; }
+    public void setDropoffLocation(String dropoffLocation) {
+        this.dropoffLocation = dropoffLocation;
+    }
+
+    public long getTotalDays() {
+        return totalDays;
+    }
+
+    public void setTotalDays(long totalDays) {
+        this.totalDays = totalDays;
+    }
+
+    public BigDecimal getBaseAmount() {
+        return baseAmount;
+    }
+
+    public void setBaseAmount(BigDecimal baseAmount) {
+        this.baseAmount = baseAmount;
+    }
+
+    public BigDecimal getSurchargeAmount() {
+        return surchargeAmount;
+    }
+
+    public void setSurchargeAmount(BigDecimal surchargeAmount) {
+        this.surchargeAmount = surchargeAmount;
+    }
+
+    public BigDecimal getDiscountAmount() {
+        return discountAmount;
+    }
+
+    public void setDiscountAmount(BigDecimal discountAmount) {
+        this.discountAmount = discountAmount;
+    }
+
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public BigDecimal getDepositAmount() {
+        return depositAmount;
+    }
+
+    public void setDepositAmount(BigDecimal depositAmount) {
+        this.depositAmount = depositAmount;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 }
