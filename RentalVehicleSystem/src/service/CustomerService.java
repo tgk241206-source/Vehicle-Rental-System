@@ -5,7 +5,7 @@ import model.Customer;
 
 public class CustomerService {
 
-    private CustomerDAO customerDAO = new CustomerDAO();
+    private CustomerDAO custmerDAO = new CustomerDAO();
 
     // Lay thong tin khach hang theo ID
     public Customer getCustomerById(int id) {
@@ -23,4 +23,5 @@ public class CustomerService {
     }
 
 }
+
 
