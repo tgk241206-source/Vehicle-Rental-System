@@ -67,7 +67,10 @@ public class Customer {
     public void setAddress(String address) { this.address = address; }
 
     public String getGender() { return gender; }
-    public void setGender(String gender) { this.gender = ge
+    public void setGender(String gender) { this.gender = gender; }
+
+    public String getDob() { return dob; }
+    public void setDob(String dob) { this.dob = dob; }
 
     @Override
     public String toString() {
