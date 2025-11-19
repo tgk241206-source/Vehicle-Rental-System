@@ -136,4 +136,6 @@ public class BookingService {
     public List<Booking> getAllBookings() {
         return bookingDAO.getAll();
     }
+
 }
+
