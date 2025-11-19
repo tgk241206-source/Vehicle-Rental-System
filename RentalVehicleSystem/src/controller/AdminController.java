@@ -156,4 +156,5 @@ public class AdminController {
         System.out.println("So xe dang thue: " + adminService.countRentedVehicles());
         System.out.println("Xe pho bien nhat: " + adminService.getMostPopularVehicle());
     }
+
 }
