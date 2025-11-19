@@ -42,4 +42,5 @@ public class VehicleService {
     public boolean updateVehicleStatus(int id, String status) {
         return vehicleDAO.updateStatus(id, status);
     }
+
 }
