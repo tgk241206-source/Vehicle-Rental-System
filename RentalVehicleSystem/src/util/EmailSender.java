@@ -12,4 +12,5 @@ public class EmailSender {
         System.out.println("Body: \n" + content);
         System.out.println("--------------------------------------------------");
     }
+
 }
