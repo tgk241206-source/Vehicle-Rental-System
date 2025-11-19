@@ -74,8 +74,8 @@ public class Main {
 
     private static void handleCustomerLogin() {
         System.out.println("\n--- DANG NHAP KHACH HANG ---");
-        System.out.print("Email: "); String email = sc.nextLine();
-        System.out.print("Mat khau: "); String pass = sc.nextLine();
+        System.out.print("Email: "); String email = sc.nextLine().trim();
+        System.out.print("Mat khau: "); String pass = sc.nextLine().trim();
 
         Customer customer = authController.login(email, pass);
         
@@ -348,4 +348,5 @@ public class Main {
     }
 
 }
+
 
