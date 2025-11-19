@@ -83,9 +83,11 @@ public class Staff {
     @Override
     public String toString() {
         return "Staff {" +
-                "id=
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
                 ", role='" + role + '\'' +
                 '}';
     }
-
 }
