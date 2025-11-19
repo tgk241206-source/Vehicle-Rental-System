@@ -21,4 +21,6 @@ public class CustomerService {
     public boolean changePassword(int id, String oldPass, String newPass) {
         return customerDAO.changePassword(id, oldPass, newPass);
     }
+
 }
+
