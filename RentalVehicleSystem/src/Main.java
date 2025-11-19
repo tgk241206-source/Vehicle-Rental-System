@@ -86,11 +86,11 @@ public class Main {
 
     private static void handleRegister() {
         System.out.println("\n--- DANG KY TAI KHOAN ---");
-        System.out.print("Ten: "); String name = sc.nextLine();
-        System.out.print("Email: "); String email = sc.nextLine();
-        System.out.print("Mat khau: "); String pass = sc.nextLine();
-        System.out.print("SDT: "); String phone = sc.nextLine();
-        System.out.print("Dia chi: "); String addr = sc.nextLine();
+        System.out.print("Ten: "); String name = sc.nextLine().trim();
+        System.out.print("Email: "); String email = sc.nextLine().trim();
+        System.out.print("Mat khau: "); String pass = sc.nextLine().trim();
+        System.out.print("SDT: "); String phone = sc.nextLine().trim();
+        System.out.print("Dia chi: "); String addr = sc.nextLine().trim();
 
         authController.register(name, email, pass, phone, addr);
     }
@@ -348,5 +348,6 @@ public class Main {
     }
 
 }
+
 
 
