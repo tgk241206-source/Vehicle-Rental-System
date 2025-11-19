@@ -9,7 +9,7 @@ public class VehicleDAO {
 
     private static List<Vehicle> vehicles = new ArrayList<>();
     private static int idCounter = 1;
-
+    
     // Tao du lieu mau
     static {
         vehicles.add(new Vehicle(idCounter++, "Camry", "Toyota", "Sedan", 50.0, "Available", "New Car"));
@@ -75,4 +75,5 @@ public class VehicleDAO {
         }
         return false;
     }
+
 }
