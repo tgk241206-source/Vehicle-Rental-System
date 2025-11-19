@@ -95,13 +95,6 @@ public class Payment {
     @Override
     public String toString() {
         return "Payment {" +
-                "id=" + id +
-                ", bookingId=" + bookingId +
-                ", customerId=" + customerId +
-                ", amount=" + amount +
-                ", method='" + method + '\'' +
-                ", status='" + status + '\'' +
-                ", date=" + date +
-                '}';
     }
+
 }
