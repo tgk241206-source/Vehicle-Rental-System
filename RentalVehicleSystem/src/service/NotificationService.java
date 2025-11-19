@@ -46,4 +46,5 @@ public class NotificationService {
         String content = String.format("He thong da nhan duoc khoan thanh toan %,.0f VND.\nPhuong thuc: %s.", amount, method);
         sendEmail(email, subject, content);
     }
+
 }
