@@ -47,4 +47,5 @@ public class Validator {
     public static boolean validateDateOrder(java.time.LocalDate start, java.time.LocalDate end) {
         return start != null && end != null && start.isBefore(end);
     }
+
 }
