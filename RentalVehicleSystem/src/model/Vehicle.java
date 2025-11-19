@@ -103,9 +103,7 @@ public class Vehicle {
                 ", name='" + name + '\'' +
                 ", brand='" + brand + '\'' +
                 ", category='" + category + '\'' +
-                ", pricePerDay=" + pricePerDay +
-                ", status='" + status + '\'' +
-                ", description='" + description + '\'' +
                 '}';
     }
+
 }
