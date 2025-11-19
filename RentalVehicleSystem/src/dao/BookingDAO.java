@@ -96,4 +96,5 @@ public class BookingDAO {
 
         return "Vehicle ID: " + maxId + " (" + maxCount + " bookings)";
     }
+
 }
