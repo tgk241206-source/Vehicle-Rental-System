@@ -85,3 +85,4 @@ public class CustomerDAO {
         return customers.removeIf(c -> c.getId() == customerId);
     }
 }
+
