@@ -139,8 +139,8 @@ public class Main {
     // LOGIC XU LY CHO STAFF (NHAN VIEN)
     private static void handleStaffLogin() {
         System.out.println("\n--- DANG NHAP NHAN VIEN ---");
-        System.out.print("Staff Email: "); String email = sc.nextLine();
-        System.out.print("Mat khau: "); String pass = sc.nextLine();
+        System.out.print("Staff Email: "); String email = sc.nextLine().trim();
+        System.out.print("Mat khau: "); String pass = sc.nextLine().trim();
 
         Staff staff = staffController.login(email, pass);
 
@@ -257,8 +257,8 @@ public class Main {
 
     private static void handleAdminLogin() {
         System.out.println("\n--- DANG NHAP QUAN TRI VIEN ---");
-        System.out.print("Admin Email: "); String mail = sc.nextLine();
-        System.out.print("Mat khau: "); String pass = sc.nextLine();
+        System.out.print("Admin Email: "); String mail = sc.nextLine().trim();
+        System.out.print("Mat khau: "); String pass = sc.nextLine().trim();
 
         Admin admin = adminController.login(mail, pass);
         
@@ -348,6 +348,7 @@ public class Main {
     }
 
 }
+
 
 
 
